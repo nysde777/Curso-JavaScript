@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="miBoton">haz clic aqui</button>
+    <input type="text" id="miInput" placeholder="escribe algo">
+    <form id="miForm">
+        <input type="text" placeholder="nombre" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const boton = document.getElementById("miBoton");
+        boton.addEventListener("click", ()=>{
+            alert("haz realizado un click")
+        })
+        const input = document.getElementById("miInput");
+        input.addEventListener("input", (evento)=>{
+            console.log("valor actual:", evento.target.value);
+        })
+
+        const form = document.getElementById("miForm");
+        form.addEventListener("submit", (evento)=>{
+            evento.preventDefault();
+            alert("Formulario enviado");
+        })
+    </script>
+</body>
+</html>

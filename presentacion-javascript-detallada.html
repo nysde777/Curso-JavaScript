@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temario de JavaScript - Presentación Detallada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            height: 650px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            flex: 1;
+            padding: 60px 60px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .slide .topic {
+            font-size: 0.9rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            color: #764ba2;
+            margin-bottom: 40px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .slide .content {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .slide .code-example {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin-top: 30px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            color: #333;
+            overflow-x: auto;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .slide.title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .slide.title-slide h1 {
+            color: white;
+            font-size: 4.5rem;
+        }
+
+        .slide.title-slide p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                height: auto;
+                min-height: 100vh;
+                border-radius: 0;
+            }
+
+            .slide {
+                padding: 40px 25px;
+            }
+
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+
+            .slide h2 {
+                font-size: 1.8rem;
+            }
+
+            .controls {
+                padding: 20px 25px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="slide active title-slide">
+            <h1>JavaScript</h1>
+            <p>Temario Completo del Curso</p>
+        </div>
+
+        <!-- TEMA 1: FUNDAMENTOS -->
+        <div class="slide">
+            <div class="topic">Tema 1: Fundamentos</div>
+            <h2>Historia breve de JS y su rol en la web moderna</h2>
+            <div class="content">
+                <p>JavaScript fue creado en 1995 por Brendan Eich. Inicialmente llamado Mocha y luego LiveScript, finalmente se renombró a JavaScript.</p>
+                <p>Hoy en día, JavaScript es el lenguaje de programación más importante para el desarrollo web, permitiendo interactividad y dinamismo en las aplicaciones.</p>
+                <div class="code-example">// JavaScript ejecutándose en navegadores y servidores (Node.js)</div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 1: Fundamentos</div>
+            <h2>Sintaxis básica: variables (let, const, var), tipos de datos</h2>
+            <div class="content">
+                <p>Las variables son contenedores para almacenar datos. JavaScript ofrece tres formas de declarar variables:</p>
+                <div class="code-example">
+const nombre = "Juan"; // No se puede reasignar<br>
+let edad = 25; // Se puede reasignar<br>
+var ciudad = "Madrid"; // Antigua forma, evitar usar
+                </div>
+                <p><strong>Tipos de datos:</strong> string, number, boolean, object, undefined, null, symbol, bigint</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 1: Fundamentos</div>
+            <h2>Operadores: aritméticos, lógicos, relacionales, ternario</h2>
+            <div class="content">
+                <p><strong>Aritméticos:</strong> +, -, *, /, %, **</p>
+                <p><strong>Lógicos:</strong> &&, ||, !</p>
+                <p><strong>Relacionales:</strong> ==, ===, !=, !==, <, >, <=, >=</p>
+                <div class="code-example">
+const resultado = edad > 18 ? "Mayor de edad" : "Menor de edad";
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 1: Fundamentos</div>
+            <h2>Estructuras de control: if, switch, for, while, do...while</h2>
+            <div class="content">
+                <p>Las estructuras de control permiten controlar el flujo de ejecución del programa.</p>
+                <div class="code-example">
+if (condicion) { /* ... */ }<br>
+switch (valor) { case 1: /* ... */ }<br>
+for (let i = 0; i < 10; i++) { /* ... */ }<br>
+while (condicion) { /* ... */ }
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 1: Fundamentos</div>
+            <h2>Funciones: declarativas, expresiones, arrow functions</h2>
+            <div class="content">
+                <p>Las funciones son bloques de código reutilizable.</p>
+                <div class="code-example">
+function saludar() { } // Declarativa<br>
+const saludar = function() { } // Expresión<br>
+const saludar = () => { } // Arrow function
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 1: Fundamentos</div>
+            <h2>Scope y hoisting</h2>
+            <div class="content">
+                <p><strong>Scope:</strong> Es el contexto donde las variables están disponibles. Puede ser global, de función o de bloque.</p>
+                <p><strong>Hoisting:</strong> Es el comportamiento de mover declaraciones al inicio del scope.</p>
+                <div class="code-example">
+// Las funciones se elevan completamente<br>
+// Las variables (let/const) se elevan pero sin inicializar
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 1: Fundamentos</div>
+            <h2>Template literals</h2>
+            <div class="content">
+                <p>Forma moderna de crear cadenas de texto con interpolación y múltiples líneas.</p>
+                <div class="code-example">
+const nombre = "Juan";<br>
+const mensaje = `Hola, ${nombre}!`;<br>
+const texto = `<br>
+  Primera línea<br>
+  Segunda línea<br>
+`;
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 2: OBJETOS Y ARRAYS -->
+        <div class="slide">
+            <div class="topic">Tema 2: Objetos y Arrays</div>
+            <h2>Objetos: creación, propiedades, métodos</h2>
+            <div class="content">
+                <p>Los objetos son colecciones de pares clave-valor.</p>
+                <div class="code-example">
+const persona = {<br>
+&nbsp;&nbsp;nombre: "Juan",<br>
+&nbsp;&nbsp;edad: 25,<br>
+&nbsp;&nbsp;saludar() { return "Hola"; }<br>
+};
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 2: Objetos y Arrays</div>
+            <h2>Arrays: creación, métodos modernos (map, filter, reduce, find, some, every, flatMap)</h2>
+            <div class="content">
+                <p>Los arrays son listas ordenadas de valores.</p>
+                <div class="code-example">
+const nums = [1, 2, 3, 4, 5];<br>
+nums.map(n => n * 2); // [2, 4, 6, 8, 10]<br>
+nums.filter(n => n > 2); // [3, 4, 5]<br>
+nums.reduce((sum, n) => sum + n, 0); // 15
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 2: Objetos y Arrays</div>
+            <h2>Desestructuración de objetos y arrays</h2>
+            <div class="content">
+                <p>Forma moderna de extraer valores de objetos y arrays.</p>
+                <div class="code-example">
+// Objetos<br>
+const { nombre, edad } = persona;<br>
+<br>
+// Arrays<br>
+const [primero, segundo] = [10, 20];
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 2: Objetos y Arrays</div>
+            <h2>Spread/rest operators</h2>
+            <div class="content">
+                <p>El operador ... (spread/rest) permite expandir o recopilar elementos.</p>
+                <div class="code-example">
+const arr1 = [1, 2];<br>
+const arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]<br>
+<br>
+function suma(...numeros) { // rest<br>
+&nbsp;&nbsp;return numeros.reduce((a, b) => a + b, 0);<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 2: Objetos y Arrays</div>
+            <h2>JSON: parse y stringify</h2>
+            <div class="content">
+                <p>JSON es un formato de intercambio de datos basado en texto.</p>
+                <div class="code-example">
+const obj = { nombre: "Juan", edad: 25 };<br>
+const json = JSON.stringify(obj);<br>
+const objeto = JSON.parse(json);
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 3: FUNCIONES AVANZADAS -->
+        <div class="slide">
+            <div class="topic">Tema 3: Funciones Avanzadas</div>
+            <h2>Closures</h2>
+            <div class="content">
+                <p>Un closure es una función que tiene acceso a las variables de su función padre, incluso después de que la función padre haya terminado.</p>
+                <div class="code-example">
+function contador() {<br>
+&nbsp;&nbsp;let count = 0;<br>
+&nbsp;&nbsp;return () => ++count; // Acceso a count<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 3: Funciones Avanzadas</div>
+            <h2>Funciones de orden superior</h2>
+            <div class="content">
+                <p>Son funciones que reciben otras funciones como parámetros o las retornan.</p>
+                <div class="code-example">
+const multiplicar = (n) => (m) => n * m;<br>
+const doble = multiplicar(2);<br>
+console.log(doble(5)); // 10
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 3: Funciones Avanzadas</div>
+            <h2>Callback functions</h2>
+            <div class="content">
+                <p>Son funciones pasadas como argumento a otra función para ser ejecutadas posteriormente.</p>
+                <div class="code-example">
+function obtenerDatos(callback) {<br>
+&nbsp;&nbsp;setTimeout(() => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;callback("Datos obtenidos");<br>
+&nbsp;&nbsp;}, 1000);<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 3: Funciones Avanzadas</div>
+            <h2>IIFE (Immediately Invoked Function Expressions)</h2>
+            <div class="content">
+                <p>Son funciones que se invocan inmediatamente después de ser definidas.</p>
+                <div class="code-example">
+(function() {<br>
+&nbsp;&nbsp;let variable = "privada";<br>
+&nbsp;&nbsp;console.log(variable);<br>
+})();
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 3: Funciones Avanzadas</div>
+            <h2>Currying y composición básica</h2>
+            <div class="content">
+                <p><strong>Currying:</strong> Convertir una función que toma múltiples argumentos en varias funciones que toman un argumento.</p>
+                <div class="code-example">
+const suma = (a) => (b) => a + b;<br>
+const suma5 = suma(5);<br>
+console.log(suma5(3)); // 8
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 4: OOP -->
+        <div class="slide">
+            <div class="topic">Tema 4: Programación Orientada a Objetos</div>
+            <h2>Clases y constructor</h2>
+            <div class="content">
+                <p>Las clases son plantillas para crear objetos con propiedades y métodos.</p>
+                <div class="code-example">
+class Persona {<br>
+&nbsp;&nbsp;constructor(nombre, edad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.nombre = nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.edad = edad;<br>
+&nbsp;&nbsp;}<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 4: Programación Orientada a Objetos</div>
+            <h2>Métodos y propiedades</h2>
+            <div class="content">
+                <p>Los métodos son funciones dentro de una clase. Las propiedades son variables.</p>
+                <div class="code-example">
+class Persona {<br>
+&nbsp;&nbsp;saludar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return `Hola, soy ${this.nombre}`;<br>
+&nbsp;&nbsp;}<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 4: Programación Orientada a Objetos</div>
+            <h2>Herencia (extends y super)</h2>
+            <div class="content">
+                <p>Permite que una clase herede propiedades y métodos de otra.</p>
+                <div class="code-example">
+class Empleado extends Persona {<br>
+&nbsp;&nbsp;constructor(nombre, edad, salario) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;super(nombre, edad);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.salario = salario;<br>
+&nbsp;&nbsp;}<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 4: Programación Orientada a Objetos</div>
+            <h2>Encapsulamiento: getters y setters</h2>
+            <div class="content">
+                <p>Permite controlar el acceso a las propiedades de una clase.</p>
+                <div class="code-example">
+class Persona {<br>
+&nbsp;&nbsp;get edad() { return this._edad; }<br>
+&nbsp;&nbsp;set edad(valor) { this._edad = valor; }<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 4: Programación Orientada a Objetos</div>
+            <h2>Prototipos y prototypal inheritance (básico y moderno)</h2>
+            <div class="content">
+                <p>JavaScript utiliza herencia basada en prototipos. Cada objeto tiene un prototipo del cual hereda propiedades.</p>
+                <div class="code-example">
+Object.create() // Crear objeto con prototipo específico<br>
+Object.getPrototypeOf() // Obtener prototipo<br>
+constructor.prototype // Acceso al prototipo
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 5: PROGRAMACIÓN FUNCIONAL -->
+        <div class="slide">
+            <div class="topic">Tema 5: Programación Funcional</div>
+            <h2>Conceptos de inmutabilidad y funciones puras</h2>
+            <div class="content">
+                <p><strong>Inmutabilidad:</strong> No modificar datos existentes, crear nuevos datos en su lugar.</p>
+                <p><strong>Funciones puras:</strong> Siempre devuelven el mismo resultado con los mismos inputs, sin efectos secundarios.</p>
+                <div class="code-example">
+// Pura<br>
+const suma = (a, b) => a + b;
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 5: Programación Funcional</div>
+            <h2>Uso de map, reduce, filter</h2>
+            <div class="content">
+                <p>Métodos clave para la programación funcional.</p>
+                <div class="code-example">
+const nums = [1, 2, 3, 4, 5];<br>
+nums.filter(n => n > 2).map(n => n * 2).reduce((a, b) => a + b, 0);
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 5: Programación Funcional</div>
+            <h2>Funciones anónimas y arrow functions</h2>
+            <div class="content">
+                <p>Funciones sin nombre que se usan frecuentemente en callbacks y métodos de array.</p>
+                <div class="code-example">
+const numeros = [1, 2, 3];<br>
+numeros.forEach((n) => console.log(n));
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 5: Programación Funcional</div>
+            <h2>Closures aplicados a funciones funcionales</h2>
+            <div class="content">
+                <p>Los closures permiten crear funciones que "recuerdan" el contexto en el que fueron creadas.</p>
+                <div class="code-example">
+const crearSumador = (inicial) => {<br>
+&nbsp;&nbsp;return (n) => inicial + n;<br>
+};
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 6: MÓDULOS Y SCOPE -->
+        <div class="slide">
+            <div class="topic">Tema 6: Módulos y Scope</div>
+            <h2>import y export (ES Modules)</h2>
+            <div class="content">
+                <p>Forma moderna de organizar código en módulos reutilizables.</p>
+                <div class="code-example">
+// archivo.js<br>
+export const variable = "valor";<br>
+export function funcion() { }<br>
+<br>
+// otro.js<br>
+import { variable, funcion } from './archivo.js';
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 6: Módulos y Scope</div>
+            <h2>Scope global vs local</h2>
+            <div class="content">
+                <p><strong>Global:</strong> Variables accesibles desde cualquier lugar.</p>
+                <p><strong>Local:</strong> Variables accesibles solo en su función o bloque.</p>
+                <div class="code-example">
+let global = "valor"; // Global<br>
+function local() {<br>
+&nbsp;&nbsp;let local = "valor"; // Local<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 6: Módulos y Scope</div>
+            <h2>Variables privadas con # en clases</h2>
+            <div class="content">
+                <p>El símbolo # permite crear propiedades realmente privadas en clases.</p>
+                <div class="code-example">
+class Persona {<br>
+&nbsp;&nbsp;#edad = 0; // Privada<br>
+&nbsp;&nbsp;setEdad(valor) { this.#edad = valor; }<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 7: ASINCRONÍA -->
+        <div class="slide">
+            <div class="topic">Tema 7: Asincronía</div>
+            <h2>Callbacks y problemas de callback hell</h2>
+            <div class="content">
+                <p>Los callbacks pueden llevar a código anidado y difícil de leer (callback hell).</p>
+                <div class="code-example">
+function operacion(cb) {<br>
+&nbsp;&nbsp;setTimeout(() => cb("resultado"), 1000);<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 7: Asincronía</div>
+            <h2>Promises: creación, encadenamiento (then, catch, finally)</h2>
+            <div class="content">
+                <p>Las promesas representan un valor que puede estar disponible ahora, en el futuro o nunca.</p>
+                <div class="code-example">
+new Promise((resolve, reject) => {<br>
+&nbsp;&nbsp;resolve("éxito");<br>
+}).then(res => console.log(res))<br>
+&nbsp;.catch(err => console.error(err));
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 7: Asincronía</div>
+            <h2>Async/await</h2>
+            <div class="content">
+                <p>Forma moderna y legible de trabajar con promesas.</p>
+                <div class="code-example">
+async function obtenerDatos() {<br>
+&nbsp;&nbsp;try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;const res = await fetch('/api');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return await res.json();<br>
+&nbsp;&nbsp;} catch(e) { console.error(e); }<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 7: Asincronía</div>
+            <h2>Manejo de errores en asincronía (try/catch)</h2>
+            <div class="content">
+                <p>Los bloques try/catch permiten manejar errores en código asincrónico.</p>
+                <div class="code-example">
+try {<br>
+&nbsp;&nbsp;const datos = await fetch('/api');<br>
+} catch(error) {<br>
+&nbsp;&nbsp;console.error("Error:", error);<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 7: Asincronía</div>
+            <h2>Fetch API y manejo de datos externos</h2>
+            <div class="content">
+                <p>Fetch permite hacer peticiones HTTP desde el navegador.</p>
+                <div class="code-example">
+fetch('/api/datos')<br>
+&nbsp;&nbsp;.then(res => res.json())<br>
+&nbsp;&nbsp;.then(data => console.log(data))<br>
+&nbsp;&nbsp;.catch(err => console.error(err));
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 8: EVENTOS Y DOM -->
+        <div class="slide">
+            <div class="topic">Tema 8: Eventos y DOM</div>
+            <h2>Manipulación del DOM (querySelector, getElementById, appendChild, etc.)</h2>
+            <div class="content">
+                <p>El DOM (Document Object Model) permite interactuar con elementos HTML desde JavaScript.</p>
+                <div class="code-example">
+const elemento = document.querySelector('.clase');<br>
+elemento.appendChild(nuevoElemento);<br>
+elemento.textContent = "Nuevo texto";
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 8: Eventos y DOM</div>
+            <h2>Eventos: click, input, change, submit, keydown</h2>
+            <div class="content">
+                <p>Los eventos permiten reaccionar a las acciones del usuario.</p>
+                <div class="code-example">
+elemento.addEventListener('click', (e) => {<br>
+&nbsp;&nbsp;console.log('Click!');<br>
+});<br>
+<br>
+input.addEventListener('input', (e) => {<br>
+&nbsp;&nbsp;console.log(e.target.value);<br>
+});
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 8: Eventos y DOM</div>
+            <h2>Event delegation</h2>
+            <div class="content">
+                <p>Técnica de escuchar eventos en un elemento padre para elementos hijos.</p>
+                <div class="code-example">
+contenedor.addEventListener('click', (e) => {<br>
+&nbsp;&nbsp;if (e.target.matches('button')) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log('Botón clickeado');<br>
+&nbsp;&nbsp;}<br>
+});
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 8: Eventos y DOM</div>
+            <h2>Formulario y validación básica</h2>
+            <div class="content">
+                <p>Validar y procesar datos de formularios.</p>
+                <div class="code-example">
+formulario.addEventListener('submit', (e) => {<br>
+&nbsp;&nbsp;e.preventDefault();<br>
+&nbsp;&nbsp;const valor = input.value;<br>
+&nbsp;&nbsp;if (valor.length > 0) { /* procesar */ }<br>
+});
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 8: Eventos y DOM</div>
+            <h2>Event loop, call stack y task queue</h2>
+            <div class="content">
+                <p>Conceptos fundamentales de cómo JavaScript ejecuta código asincrónico.</p>
+                <p><strong>Call Stack:</strong> Pila de funciones en ejecución.</p>
+                <p><strong>Task Queue:</strong> Cola de tareas asincrónicas pendientes.</p>
+                <p><strong>Event Loop:</strong> Controla la ejecución de tareas.</p>
+            </div>
+        </div>
+
+        <!-- TEMA 9: APIS MODERNAS -->
+        <div class="slide">
+            <div class="topic">Tema 9: APIs Modernas y Browser APIs</div>
+            <h2>LocalStorage y SessionStorage</h2>
+            <div class="content">
+                <p>APIs para almacenar datos en el navegador.</p>
+                <div class="code-example">
+// LocalStorage<br>
+localStorage.setItem('clave', 'valor');<br>
+const valor = localStorage.getItem('clave');<br>
+<br>
+// SessionStorage (se borra al cerrar la pestaña)<br>
+sessionStorage.setItem('temp', 'valor');
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 9: APIs Modernas y Browser APIs</div>
+            <h2>IndexedDB básico</h2>
+            <div class="content">
+                <p>Base de datos en el navegador para almacenar grandes cantidades de datos estructurados.</p>
+                <div class="code-example">
+const request = indexedDB.open('miBaseDatos', 1);<br>
+request.onupgradeneeded = (e) => {<br>
+&nbsp;&nbsp;const db = e.target.result;<br>
+&nbsp;&nbsp;db.createObjectStore('almacen');<br>
+};
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 9: APIs Modernas y Browser APIs</div>
+            <h2>Geolocation API</h2>
+            <div class="content">
+                <p>Permite obtener la ubicación geográfica del usuario.</p>
+                <div class="code-example">
+navigator.geolocation.getCurrentPosition(<br>
+&nbsp;&nbsp;(pos) => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(pos.coords.latitude);<br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;(err) => console.error(err)<br>
+);
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 9: APIs Modernas y Browser APIs</div>
+            <h2>History API y manejo de rutas simples</h2>
+            <div class="content">
+                <p>Controla el historial de navegación sin recargar la página.</p>
+                <div class="code-example">
+window.history.pushState({}, '', '/nueva-ruta');<br>
+window.history.back();<br>
+<br>
+window.addEventListener('popstate', (e) => {<br>
+&nbsp;&nbsp;console.log('Atrás clickeado');<br>
+});
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 9: APIs Modernas y Browser APIs</div>
+            <h2>IntersectionObserver y otros APIs modernos útiles</h2>
+            <div class="content">
+                <p>Detecta cuando elementos entran/salen del viewport.</p>
+                <div class="code-example">
+const observer = new IntersectionObserver((entries) => {<br>
+&nbsp;&nbsp;entries.forEach(entry => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (entry.isIntersecting) console.log('Visible');<br>
+&nbsp;&nbsp;});<br>
+});
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 10: ES6+ -->
+        <div class="slide">
+            <div class="topic">Tema 10: ES6+ y Novedades Recientes</div>
+            <h2>Template literals y multi-line strings</h2>
+            <div class="content">
+                <p>Forma moderna de crear cadenas con interpolación.</p>
+                <div class="code-example">
+const nombre = "Juan";<br>
+const mensaje = `<br>
+  Hola, ${nombre}!<br>
+  ¿Cómo estás?<br>
+`;
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 10: ES6+ y Novedades Recientes</div>
+            <h2>Destructuring y spread/rest</h2>
+            <div class="content">
+                <p>Extraer valores y expandir arrays/objetos.</p>
+                <div class="code-example">
+const { a, b } = { a: 1, b: 2 };<br>
+const [x, ...resto] = [1, 2, 3, 4];<br>
+const merged = { ...obj1, ...obj2 };
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 10: ES6+ y Novedades Recientes</div>
+            <h2>Default parameters</h2>
+            <div class="content">
+                <p>Valores por defecto para parámetros de función.</p>
+                <div class="code-example">
+function saludar(nombre = "Usuario") {<br>
+&nbsp;&nbsp;return `Hola, ${nombre}!`;<br>
+}<br>
+<br>
+const multiplicar = (a, b = 2) => a * b;
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 10: ES6+ y Novedades Recientes</div>
+            <h2>Optional chaining (?.) y nullish coalescing (??)</h2>
+            <div class="content">
+                <p>Acceso seguro a propiedades y valores por defecto.</p>
+                <div class="code-example">
+const ciudad = persona?.direccion?.ciudad;<br>
+const nombre = valores.nombre ?? "Desconocido";
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 10: ES6+ y Novedades Recientes</div>
+            <h2>BigInt, Symbol</h2>
+            <div class="content">
+                <p><strong>BigInt:</strong> Para números muy grandes.</p>
+                <p><strong>Symbol:</strong> Para propiedades únicas.</p>
+                <div class="code-example">
+const grande = 123456789012345678901234567890n;<br>
+const id = Symbol('id');<br>
+objeto[id] = "valor";
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 10: ES6+ y Novedades Recientes</div>
+            <h2>Dynamic import y top-level await</h2>
+            <div class="content">
+                <p>Importar módulos dinámicamente y usar await en nivel superior.</p>
+                <div class="code-example">
+const modulo = await import('./modulo.js');<br>
+<br>
+// En módulo ES<br>
+const datos = await fetch('/api');
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 10: ES6+ y Novedades Recientes</div>
+            <h2>Private class fields</h2>
+            <div class="content">
+                <p>Propiedades privadas en clases con el símbolo #.</p>
+                <div class="code-example">
+class Cuenta {<br>
+&nbsp;&nbsp;#saldo = 0; // Privada<br>
+&nbsp;&nbsp;#verificar() { } // Método privado<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 11: ERRORES Y DEPURACIÓN -->
+        <div class="slide">
+            <div class="topic">Tema 11: Errores y Depuración</div>
+            <h2>Tipos de errores (SyntaxError, TypeError, etc.)</h2>
+            <div class="content">
+                <p><strong>SyntaxError:</strong> Error en la sintaxis del código.</p>
+                <p><strong>TypeError:</strong> Error de tipo de dato.</p>
+                <p><strong>ReferenceError:</strong> Variable no definida.</p>
+                <p><strong>RangeError:</strong> Valor fuera de rango.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 11: Errores y Depuración</div>
+            <h2>try/catch/finally</h2>
+            <div class="content">
+                <p>Manejar errores y ejecutar código sin importar el resultado.</p>
+                <div class="code-example">
+try {<br>
+&nbsp;&nbsp;// código riesgoso<br>
+} catch(error) {<br>
+&nbsp;&nbsp;console.error("Error:", error);<br>
+} finally {<br>
+&nbsp;&nbsp;// siempre se ejecuta<br>
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 11: Errores y Depuración</div>
+            <h2>console avanzado (console.table, console.group)</h2>
+            <div class="content">
+                <p>Herramientas avanzadas para depuración.</p>
+                <div class="code-example">
+console.table(datos);<br>
+console.group("Grupo");<br>
+console.log("Mensaje 1");<br>
+console.log("Mensaje 2");<br>
+console.groupEnd();
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 11: Errores y Depuración</div>
+            <h2>Debugger y DevTools tips</h2>
+            <div class="content">
+                <p>Herramientas del navegador para depuración.</p>
+                <div class="code-example">
+debugger; // Pausa aquí<br>
+console.log("Ver en DevTools");<br>
+console.trace(); // Stack trace
+                </div>
+            </div>
+        </div>
+
+        <!-- TEMA 12: BUENAS PRÁCTICAS -->
+        <div class="slide">
+            <div class="topic">Tema 12: Buenas Prácticas</div>
+            <h2>Uso de strict mode</h2>
+            <div class="content">
+                <p>Modo estricto hace que el código sea más seguro y eficiente.</p>
+                <div class="code-example">
+'use strict';<br>
+// Código en modo estricto<br>
+// No permite variables sin declarar, eval(), etc.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 12: Buenas Prácticas</div>
+            <h2>Variables const para inmutabilidad</h2>
+            <div class="content">
+                <p>Usar const por defecto para evitar reasignaciones accidentales.</p>
+                <div class="code-example">
+const PI = 3.14159; // Constante<br>
+const config = { /* ... */ }; // Objeto mutable<br>
+const lista = [1, 2, 3]; // Array mutable
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 12: Buenas Prácticas</div>
+            <h2>Evitar efectos secundarios innecesarios</h2>
+            <div class="content">
+                <p>Las funciones puras sin efectos secundarios son más predecibles.</p>
+                <div class="code-example">
+// Malo - con efecto secundario<br>
+let total = 0;<br>
+function sumar(n) { total += n; }<br>
+<br>
+// Bueno - sin efecto secundario<br>
+function sumar(a, b) { return a + b; }
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 12: Buenas Prácticas</div>
+            <h2>Modularización y separación de responsabilidades</h2>
+            <div class="content">
+                <p>Dividir el código en módulos pequeños y enfocados.</p>
+                <div class="code-example">
+// usuarios.js - Responsable de usuarios<br>
+export function obtenerUsuarios() { }<br>
+<br>
+// auth.js - Responsable de autenticación<br>
+export function autenticar() { }
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="topic">Tema 12: Buenas Prácticas</div>
+            <h2>Código limpio y comentarios útiles</h2>
+            <div class="content">
+                <p>Escribir código legible y auto-documentado.</p>
+                <div class="code-example">
+// Comenta el por qué, no el qué<br>
+const MAX_INTENTOS = 3; // Según regulaciones<br>
+<br>
+// Nombres descriptivos<br>
+function calcularDescuentoPorVolumen() { }
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL SLIDE -->
+        <div class="slide title-slide">
+            <h1>¡Felicidades!</h1>
+            <p>Has completado todo el temario de JavaScript</p>
+        </div>
+
+        <div class="controls">
+            <button id="prevBtn" onclick="changeSlide(-1)">← Atrás</button>
+            <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">72</span></span>
+            <button id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = n + 1;
+            
+            const progress = ((n + 1) / totalSlides) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            document.getElementById('prevBtn').disabled = n === 0;
+            document.getElementById('nextBtn').disabled = n === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
